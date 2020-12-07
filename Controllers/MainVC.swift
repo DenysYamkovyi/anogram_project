@@ -52,7 +52,9 @@ class MainVC: UIViewController {
                     //get each character in "eachWord" to check
                     var isAnogram = 0
                     for character in Array(eachWord) {
-                        if searchWord.contains(character) {
+                        let searchWordCount = checkForQuality(inArray: Array(searchWord), character: character)
+                        let eachWordCount = checkForQuality(inArray: Array(eachWord), character: character)
+                        if searchWord.contains(character) && searchWordCount == eachWordCount {
                             isAnogram = isAnogram + 1
                         }
                     }
@@ -65,6 +67,16 @@ class MainVC: UIViewController {
             return anogramCount
         }
         return anogramCount
+    }
+    
+    private func checkForQuality(inArray: Array<Any>, character: Character) -> Int {
+        var count = 0
+        for symbol in inArray {
+            if symbol as! Character == character {
+                count = count + 1
+            }
+        }
+        return count
     }
 }
 
